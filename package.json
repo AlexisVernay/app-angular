@@ -1,0 +1,19 @@
+{
+  "name": "app-angular",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "bower": "^1.6.3",
+    "browser-sync": "^2.9.11",
+    "gulp": "^3.9.0",
+    "normalize": "^0.3.1",
+    "sass": "^0.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
