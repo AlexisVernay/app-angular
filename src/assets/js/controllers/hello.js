@@ -25,7 +25,6 @@
         }
       };
 
-
-
     });
+
 })(window.angular);

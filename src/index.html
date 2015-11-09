@@ -24,7 +24,11 @@
     </div>
 
     <div ng-controller="contactController as contactCtrl">
-        <div ng-repeat="contacts in contactCtrl.contacts">{{contacts.name}}, {{contacts.phone}}</div>
+      <div ng-repeat="contacts in contactCtrl.contacts">
+        <h3 ng-bind="contacts.name"></h3>
+        <p ng-bind="contacts.phone"></p>
+        <hr>
+      </div>
     </div>
 
     <div >
