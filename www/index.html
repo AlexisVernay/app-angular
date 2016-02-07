@@ -6,7 +6,7 @@
     <script type="text/javascript" src="assets/js/controllers/hello.js"></script>
     <script type="text/javascript" src="assets/js/controllers/contact.js"></script>
     <script type="text/javascript" src="assets/js/controllers/checkin.js"></script>
-    <script type="text/javascript" src="assets/js/controllers/geolocation.js"></script>
+    <!--<script type="text/javascript" src="assets/js/controllers/geolocation.js"></script> -->
     <script type="text/javascript" src="assets/js/app.js"></script>
 
     <title></title>
@@ -15,30 +15,12 @@
 
   <body>
 
-    <!--<form ng-controller="checkinFormController" ng-submit="submit()">
+    <form ng-controller="checkinFormController" ng-submit="submit()">
       <input type="text" name="lat" ng-model="lat" ng-disabled="geolocationIsSupported" placeholder="Latitude"/>
       <input type="text" name="lng" ng-model="lng" ng-disabled="geolocationIsSupported" placeholder="Longitude"/>
       <input type="submit" name="name" value="CheckIN!" ng-disabled='loading'/>
       <span ng-if="loading"> Chargement en cours </span>
-    </form>-->
-
-
-
-
-
-    <!--<div ng-controller="checkinFormController" ng-submit="submit()">
-        <label>Lat: <input ng-model="search.lon"></label>
-        <label>Lon: <input ng-model="search.lng"></label>
-        <input type="submit" name="name" value="CheckIN!" ng-disabled='loading'/>
-    </div>-->
-
-
-    <!--<form ng-controller="checkinAdress" ng-submit="submit()">
-      <input type="text" name="lat" ng-model="lat" ng-disabled="geolocationIsSupported" placeholder="Latitude"/>
-      <input type="text" name="lng" ng-model="lng" ng-disabled="geolocationIsSupported" placeholder="Longitude"/>
-      <input type="submit" name="name" value="CheckIN!" ng-disabled='loading'/>
-      <span ng-if="loading"> Chargement en cours </span>
-    </form>-->
+    </form>
 
 
     <div ng-view></div>

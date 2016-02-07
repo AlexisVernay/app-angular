@@ -1,0 +1,16 @@
+<h1>CheckIn List</h1>
+<div ng-controller="checkinController as checkinCtrl">
+  <ul>
+    <label>Lat: <input ng-model="search.lat"></label>
+    <label>Lng: <input ng-model="search.lng"></label>
+    <input type="submit" name="name" value="CheckIN!" ng-disabled='loading'/>
+    <li ng-repeat="checkin in checkins | filter:search:strict">
+      <p>{{checkin.id}}<p/>
+      <p><img src="{{checkin.user.picture}}" alt=""><p/>
+      <p>{{checkin.user.name}}<p/>
+      <p>{{checkin.user.email}}<p/>
+      <p>{{checkin.lat}}<p/>
+      <p>{{checkin.lng}}<p/>
+    </li>
+  </ul>
+</div>
