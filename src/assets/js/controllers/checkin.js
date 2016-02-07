@@ -13,6 +13,9 @@
           $scope.checkins = response.data;
           // this callback will be called asynchronously
           // when the response is available
+        }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
         });
       };
 
@@ -38,15 +41,10 @@
 
     })
 
+    // Details des checkin
     .controller('checkinDetailsController', function($http, $scope, $routeParams){
       console.log('CheckIn Details');
       console.log($routeParams);
-
-      var i = 'rien';
-
-      console.log('1');
-
-      console.log(i);
 
       $http({
         method: 'GET',
@@ -54,41 +52,48 @@
       }).then(function successCallback(response){
         console.log(response.data);
         $scope.checkinDetails = response.data;
-
-
+        // this callback will be called asynchronously
+        // when the response is available
       }, function errorCallback(response) {
-
-
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
       });
-      console.log(i);
-      console.log('3');
-
     })
 
 
-    .controller('checkinFormController', function($rootScope, $scope, $http){
-      $scope.loading = false;
-      $scope.geolocationIsSupported = false;
+    .controller('checkinFormController', function($scope, $http){
+      console.log("Controller Add");
 
-      //$scope.getGeolocation = funtion(){
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position){
-              //$scope.geolocationIsSupported = false;
-              console.log(position);
-              console.log(position.coords.lattitude);
-              console.log(position.coords.longitude);
               $scope.$apply(function(){
                 $scope.lat = position.coords.latitude;
                 $scope.lng = position.coords.longitude;
               });
           });
         } else {
-            //x.innerHTML = "Geolocation is not supported by this browser.";
+            alert("La géolocalisation n'est pas supporté par votre navigateur !!");
         }
 
-
+      var getChekinList = function() {
+        if(localStorageService.isSupported) {
+          alert("Tout va bien ! L'appli fonctionnera bien");
+        } else {
+          alert("Votre navigateur ne supporte pas la sauvearde local, certaines fonctionnalitée isque de ne pas fonctionner.");
+        }
+      };
 
       $scope.submit = function(){
+        var checkins = localStorageService.get('checkins');
+        if(checkins === null) {
+          checkins = [];
+        }
+        checkins.push({lat : $scope.lat, lng : $scope.lng});
+        localStorageService.set("checkins", checkins);
+        $rootScope.$broadcast("NBChekin");
+
+
           console.log($scope.lat + ' ' + $scope.lng);
           $http({
             method: 'POST',
@@ -101,19 +106,25 @@
               'Content-Type': undefined
             }
           }).then(function successCallback(response) {
-            console.log(response.data);
-            $scope.checkins = response.data;
-            $scope.loading = false;
-
             $rootScope.$broadcast('checkInAdded');
+            $scope.pop = function(){
+              toaster.pop('success', "Ajout réussi", "Le chekin à  bien été ajouté");
+            };
             // this callback will be called asynchronously
             // when the response is available
           }, function errorCallback(response) {
+            console.log(response);
+            $scope.pop = function(){
+              toaster.pop('error', "Echec de l'ajout", "Une erreur est survenu ! Réessayer ulterieurement");
+            };
             // called asynchronously if an error occurs
             // or server returns response with an error status.
           });
+
       };
-    });
+    })
+
+
 
     /*.controller('ctrl.checkin.LocalStorage', function($scope, $rootScope, $http, localStorageService, toaster) {
 
